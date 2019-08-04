@@ -6,7 +6,6 @@ import (
   "fmt"
   "github.com/cnnrznn/channel"
   "io/ioutil"
-  "time"
 )
 
 type Config struct {
@@ -41,4 +40,5 @@ func main() {
     fmt.Println(ch)
 
     // TODO run consensus protocol
+    v := consensus(ch, 0, 0)
 }
