@@ -58,9 +58,8 @@ func consensus(ch channel.Channel) int {
     v := 0
     d := false
 
-    for d == false {
+    for ;d == false; r++ {
         v, d = round(ch, v, r)
-        r += 1
     }
 
     return v
