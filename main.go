@@ -40,5 +40,5 @@ func main() {
     fmt.Println(ch)
 
     // TODO run consensus protocol
-    v := consensus(ch, 0, 0)
+    consensus(ch)
 }

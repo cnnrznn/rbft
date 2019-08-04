@@ -23,12 +23,17 @@ func faulty(ch channel.Channel) int {
 
 func round(ch channel.Channel, v int, r int) (int, bool) {
     message_count := make([]int, 2)
-    echo_count := make([][2]int, len(ch.Peers))
+    //echo_count := make([][2]int, len(ch.Peers))
     decision := false
-    var msg channel.Msg
+    //var msg channel.Msg
+
+    ch.Broadcast(channel.Msg{ch.Id,
+                             channel.INITIAL,
+                             r,
+                             string(v)})
 
     for sum(message_count) < (2 * faulty(ch) + 1) {
-        msg = ch.Recv()
+        //msg = ch.Recv()
 
         message_count[0]++
     }
@@ -48,3 +53,15 @@ func round(ch channel.Channel, v int, r int) (int, bool) {
     return v, decision
 }
 
+func consensus(ch channel.Channel) int {
+    r := 0
+    v := 0
+    d := false
+
+    for d == false {
+        v, d = round(ch, v, r)
+        r += 1
+    }
+
+    return v
+}
